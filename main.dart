@@ -68,7 +68,7 @@ class BankAccount {
 }
 
 //git add mooiadd
-
-
+//git commit -m "lydo"
+//$ git push -f origin master
 
 //wwwrewrewr
