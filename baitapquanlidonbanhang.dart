@@ -16,7 +16,7 @@ print ('giam gia 10% la :${thanhTien/10}')
  print ('thue VAT :$thue');
 }
 
-if (thanhTien  >= 500_000 && thanhTien <1_000_000){
+else if (thanhTien  >= 500_000 && thanhTien <1_000_000){
  print ('giam gia 5% la :${thanhTien/20}')
   thanhTien = thanhTien - thanhTien/20;
   thue = 8*thanhTien/100;
@@ -31,4 +31,5 @@ else {
 print ('thanh toan :$thanhTien');
 
 print ('tong thanh toan cuoi cung :${thanhTien+thue} ');
+
 }
