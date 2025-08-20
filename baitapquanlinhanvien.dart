@@ -20,7 +20,7 @@ if (totalSalary > 10_000_000){
   totalSalary = totalSalary - totalSalary/10;
 }
 
-if ( totalSalary <10000000 && totalSalary >7000000 ){
+else if ( totalSalary <10000000 && totalSalary >7000000 ){
   print ('thue thu nhap :${totalSalary/20}');
   totalSalary = totalSalary - totalSalary/20;
 }
@@ -31,6 +31,7 @@ else {
 print ('luong thuc lanh :$totalSalary');
 
 }
+
 
 
 
