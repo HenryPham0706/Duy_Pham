@@ -1,70 +1,120 @@
-
+import 'dart:io';
 void main() {
+  List<sinhVien> sinhViens = [];
+  while (true){
+  String choice = stdin.readLineSync() ?? '' ;
+  print ('enter 1 them sinh vien');
+  print ('Enter 2 danh sach sinh vien');
+  print ('Enter 3 tim sinh vien diem cao nhat');
 
-  const double overtimeThreshold = 40.0;
-  const double overtimeBonusRate = 0.20; 
-  const double taxThreshold1 = 7000000.0;
-  const double taxThreshold2 = 10000000.0;
-  const double taxRate1 = 0.05; 
+  if(choice =='1'){
 
-
-
-  String employeeName = '';
-  double hoursWorked = 0.0;
-  double hourlyRate = 0.0;
-
- 
-  stdout.write('Nhập họ tên nhân viên: ');
-  employeeName = stdin.readLineSync() ?? 'Unknown Employee';
-
- 
-  while (true) {
-    stdout.write('Nhập số giờ làm việc: ');
-    String? hoursWorkedStr = stdin.readLineSync();
-    hoursWorked = double.tryParse(hoursWorkedStr ?? '') ?? 0.0;
-    if (hoursWorked >= 0) {
-      break;
-    } else {
-      print('Số giờ làm việc không hợp lệ. Vui lòng nhập số không âm.');
+    print ('nhap ten sinh vien');
+    String?name = stdin.readLineSync ();
+    if (name ==null || name.isEmpty ){
+    print ('name cannot be emty,please try again');
+    continue;
+  }
+  print ('nhap diem Toan');
+  double? diemToan = double.parse(stdin.readLineSync()??'');
+  if (diemToan<0 || diemToan>10){
+    print ('diem Toan loi,vui long nhap so tu 0 den 10');
+    continue;
+  }
+  print ('nhap diem Ly');
+double? diemLy = double.parse(stdin.readLineSync()??'');
+  if (diemLy<0 || diemLy>10){
+    print ('diem Ly loi,vui long nhap so tu 0 den 10');
+    continue;
+  }
+  print ('Enter diem Hoa');
+double? diemHoa = double.parse(stdin.readLineSync()??'');
+  if (diemHoa<0 || diemHoa>10){
+    print ('diem Hoa loi,vui long nhap so tu 0 den 10');
+    continue;
+  }
+  sinhVien sinhVien = SinhVien(name,diemToan,diemLy,diemHoa);
+  sinhVien.displayInfo();
+  break;
+  }
+  else if (choice =='2'){
+    if(sinhViens.isEmpty){
+      print ('ko co sinh vien');
+    }else {
+      for (var sinhVien in sinhVien){
+        sinhVien.displayInfo();
+        print('-----------------');
+      }
+    }
+  }
+  else if (choice== '3'){
+    if (sinhVien.isEmpty){
+      print ('ko tim thay sinh vien');
+    }else {
+      sinhVien? topSinhVien;
+      for (var sinhVien in sinhViens){
+        if (topSinhVien == null ||
+        (sinhVien.diemToan + sinhVien.diemLy + sinhVien.diemHoa)/3) > 
+        (topSinhVien.diemToan + topSinhVien.diemLy + topSinhVien.diemHoa)/3{
+          topsinhVien = sinhVien;
+        }
+      } if (topSinhVien! =null){
+        print ('top sinh vien :');
+        topSinhVien.displayInfo ();
+      }
+    }
+  }else {
+    print ('Invalid choice,vui long thu lai');
+  }
+  
     }
   }
 
-
-  while (true) {
-    stdout.write('Nhập lương mỗi giờ: ');
-    String? hourlyRateStr = stdin.readLineSync();
-    hourlyRate = double.tryParse(hourlyRateStr ?? '') ?? 0.0;
-    if (hourlyRate >= 0) {
-      break;
-    } else {
-      print('Lương mỗi giờ không hợp lệ. Vui lòng nhập số không âm.');
-    }
-  }
-
- 
-  double baseSalary = hoursWorked * hourlyRate;
-
-  
-  double salaryBeforeTax = baseSalary;
-  if (hoursWorked > overtimeThreshold) {
-    double overtimeBonus = baseSalary * overtimeBonusRate;
-    salaryBeforeTax += overtimeBonus;
-  }
-
-  
-  double taxAmount = 0.0;
-  if (salaryBeforeTax > taxThreshold2) {
-    taxAmount = salaryBeforeTax * taxRate2;
-  } else if (salaryBeforeTax >= taxThreshold1) {
-    taxAmount = salaryBeforeTax * taxRate1;
-  }
- 
-  double netSalary = salaryBeforeTax - taxAmount;
-
-
-  print('\n--- THÔNG TIN LƯƠNG NHÂN VIÊN ---');
-  print('Họ tên: ${employeeName}');
-  print('Tổng lương trước thuế: ${salaryBeforeTax.toStringAsFixed(2)} VND');
-  print('Thuế thu nhập: ${taxAmount.toStringAsFixed(2)} VND');
-  print('Lương thực lãnh: ${netSalary.toStringAsFixed(2)} VND');
 }
+
+class SinhVien {
+  Sinhvien(String name, double diemToan, double diemLy, double diemHoa);
+}
+
+class sinhVien {
+  String name;
+  double diemToan;
+  double diemLy;
+  double diemHoa;
+  sinhVien(this.name, this.diemToan, this.diemLy, this.diemHoa);
+
+  void displayInfo () {
+  print ('ten :$name');
+  print ('Toan : $diemToan');
+print ('Ly : $diemLy');
+print ('Hoa :$diemHoa');
+double diemTrungBinh = ((diemToan +diemLy +diemHoa)/3);
+print ('diem trung binh :$diemTrungBinh');
+if (diemTrungBinh >9){
+  print ('sinh vien gioi');
+}
+else if (diemTrungBinh <=9 && diemTrungBinh >=7){
+  print ('sinh vien kha');
+}
+else if (diemTrungBinh <7 && diemTrungBinh >=5){
+  print ('sinh vien trung binh');
+}else {
+  print ('sinh vien kem');
+}
+}
+}
+
+  sinhVien InputsinhVien() {
+    print('nhap ten :');
+    String name = stdin.readLineSync()!;
+    print('nhap diem Toan :');
+    double diemToan = double.parse(stdin.readLineSync()!);
+    print('nhap diem Ly :');
+    double diemLy = double.parse(stdin.readLineSync()!);
+    print('nhap diem Hoa :');
+    double diemHoa = double.parse(stdin.readLineSync()!);
+    return sinhVien(name, diemToan, diemLy, diemHoa);
+  }
+
+
+
